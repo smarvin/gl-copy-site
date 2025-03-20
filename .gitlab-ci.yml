@@ -1,0 +1,44 @@
+image: ruby:3.2
+
+stages:
+  - build
+  - deploy
+  - mirror
+
+variables:
+  JEKYLL_ENV: production
+  BUNDLE_PATH: vendor/bundle
+  PAGES_DIR: public
+
+before_script:
+  - apt-get update -qq && apt-get install -y nodejs
+  - gem install bundler
+  - bundle install
+
+build:
+  stage: build
+  script:
+    - bundle exec jekyll build -d $PAGES_DIR
+  artifacts:
+    paths:
+      - $PAGES_DIR
+
+pages:
+  stage: deploy
+  script:
+    - echo "Deploying to GitLab Pages"
+  artifacts:
+    paths:
+      - $PAGES_DIR
+  only:
+    - main
+
+mirror_current_to_github:
+  stage: mirror
+  only:
+    - current
+  script:
+    - git config --global user.name "GitLab CI"
+    - git config --global user.email "scotmarvin@gmail.com"
+    - git remote add github https://$GITHUB_USER:$GITHUB_TOKEN@github.com/your-username/your-repo.git
+    - git push github main
