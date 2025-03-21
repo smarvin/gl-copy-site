@@ -47,4 +47,5 @@ mirror_to_github:
     - export GITHUB_REPO="https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GITHUB_USER}/gl-copy-site.git"
     - git remote add github "$GITHUB_REPO"
     - git remote -v
-    - git push --force github HEAD:main
+    - git push --force github HEAD:refs/heads/mirror
+
