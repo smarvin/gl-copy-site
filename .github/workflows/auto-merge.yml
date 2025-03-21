@@ -26,4 +26,7 @@ jobs:
       - name: Merge mirror into main (create merge commit)
         run: |
           git merge --no-ff origin/mirror -m "Auto-merge mirror into main"
-          git push origin main
+
+      - name: Push merge to main using PAT
+        run: |
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/OWNER/REPO.git main
