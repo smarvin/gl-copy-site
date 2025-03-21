@@ -1,4 +1,4 @@
-image: ruby:3.2
+image: ruby:3.2-bullseye
 
 stages:
   - build
@@ -9,6 +9,7 @@ variables:
   JEKYLL_ENV: production
   BUNDLE_PATH: vendor/bundle
   PAGES_DIR: public
+  GIT_DEPTH: 0  # Full clone for build, but not used for GitHub mirroring
 
 before_script:
   - apt-get update -qq && apt-get install -y nodejs
@@ -17,6 +18,8 @@ before_script:
 
 build:
   stage: build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
   script:
     - bundle exec jekyll build -d $PAGES_DIR
   artifacts:
@@ -25,20 +28,23 @@ build:
 
 pages:
   stage: deploy
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
   script:
     - echo "Deploying to GitLab Pages"
   artifacts:
     paths:
       - $PAGES_DIR
-  only:
-    - main
 
-mirror_current_to_github:
+mirror_to_github:
   stage: mirror
-  only:
-    - current
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "current"'
   script:
+    - echo "Mirroring the Git repo (source code) to GitHub..."
     - git config --global user.name "GitLab CI"
-    - git config --global user.email "scotmarvin@gmail.com"
-    - git remote add github https://$GITHUB_USER:$GITHUB_TOKEN@github.com/your-username/your-repo.git
-    - git push github main
+    - git config --global user.email "ci@example.com"
+    - export GITHUB_REPO="https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GITHUB_USER}/gl-copy-site.git"
+    - git remote add github "$GITHUB_REPO"
+    - git remote -v
+    - git push --force github HEAD:main
