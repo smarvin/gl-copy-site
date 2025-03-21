@@ -29,4 +29,4 @@ jobs:
 
       - name: Push merge to main using PAT
         run: |
-          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/OWNER/REPO.git main
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/smarvin/gl-copy-site.git main
