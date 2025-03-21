@@ -1,4 +1,4 @@
-name: Auto PR and Merge Mirror to Main
+name: Auto Merge Mirror to Main
 
 on:
   push:
@@ -6,76 +6,24 @@ on:
       - mirror
 
 jobs:
-  mirror-to-main:
+  merge:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
+      - name: Checkout main branch
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: main
+          fetch-depth: 0  # Full history is needed
 
-      - name: Create or update PR from mirror to main
-        id: create_pr
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
+      - name: Set up Git config
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
 
-            // Check for existing PR from mirror to main
-            const { data: pulls } = await github.rest.pulls.list({
-              owner,
-              repo,
-              state: "open",
-              head: `${owner}:mirror`,
-              base: "main"
-            });
+      - name: Fetch mirror branch
+        run: git fetch origin mirror
 
-            if (pulls.length > 0) {
-              console.log(`Existing PR #${pulls[0].number} found.`);
-              core.setOutput("pr_number", pulls[0].number);
-            } else {
-              // Create PR
-              const { data: newPr } = await github.rest.pulls.create({
-                owner,
-                repo,
-                title: "Auto PR: Mirror → Main",
-                head: "mirror",
-                base: "main",
-                body: "Automated PR to merge mirror into main",
-                maintainer_can_modify: true
-              });
-              console.log(`Created PR #${newPr.number}`);
-              core.setOutput("pr_number", newPr.number);
-            }
-
-      - name: Attempt to auto-merge PR
-        if: steps.create_pr.outputs.pr_number != ''
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const prNumber = parseInt("${{ steps.create_pr.outputs.pr_number }}");
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-
-            // Get PR status
-            const { data: pr } = await github.rest.pulls.get({
-              owner,
-              repo,
-              pull_number: prNumber,
-            });
-
-            if (pr.mergeable) {
-              await github.rest.pulls.merge({
-                owner,
-                repo,
-                pull_number: prNumber,
-                merge_method: "squash"
-              });
-              console.log(`PR #${prNumber} merged successfully.`);
-            } else {
-              console.log(`PR #${prNumber} is not mergeable at this time.`);
-            }
+      - name: Merge mirror into main (create merge commit)
+        run: |
+          git merge --no-ff origin/mirror -m "Auto-merge mirror into main"
+          git push origin main
