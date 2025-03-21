@@ -37,14 +37,11 @@
     {% endif %}
 
     <!-- ✅ Main Content Area -->
-    <main style="flex: 1;">
+    <main style="flex: 1; position: relative;">
+      <a class="edit-link" href="{{ site.github_repo }}/edit/mirror/{{ page.path }}" target="_blank">Edit this page</a>
       {{ content }}
-      {% if page.url contains '/docs/' and page.path %}
-      <p class="edit-link">
-        <a href="{{ site.github_repo }}/edit/mirror/{{ page.path }}" target="_blank">✏️ Edit this page on GitHub</a>
-      </p>
-    {% endif %}
     </main>
+    
 
   </div>
 
