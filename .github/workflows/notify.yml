@@ -1,0 +1,20 @@
+name: Notify Slack on Pull Request
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Notification
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          curl -X POST -H 'Content-type: application/json' --data "{
+            \"text\": \"📣 New Pull Request: *${PR_TITLE}*\n${PR_URL}\"
+          }" $SLACK_WEBHOOK_URL
+

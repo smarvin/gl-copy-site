@@ -10,3 +10,4 @@ Webhooks will be retried automatically if your server responds with an error (HT
 - Maximum Retries: 5
 - Exponential backoff applied
 - Failure notification after final attempt
+
