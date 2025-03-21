@@ -26,6 +26,9 @@ jobs:
       - name: Merge mirror into main (create merge commit)
         run: |
           git merge --no-ff origin/mirror -m "Auto-merge mirror into main"
+      - name: Test if GH_PAT works (Sanity Check)
+        run: |
+          git ls-remote https://x-access-token:${{ secrets.GH_PAT }}@github.com/smarvin/gl-copy-site.git
 
       - name: Push merge to main using PAT
         run: |
