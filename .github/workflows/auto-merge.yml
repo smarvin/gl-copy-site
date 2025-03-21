@@ -1,4 +1,4 @@
-- name: Merge mirror into main
+name: Merge mirror into main
   run: |
     git fetch origin mirror
     git checkout main
