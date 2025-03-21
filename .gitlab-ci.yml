@@ -39,7 +39,12 @@ pages:
 mirror_to_github:
   stage: mirror
   rules:
-    - if: '$CI_COMMIT_BRANCH == "current"'
+    rules:
+      - if: '$CI_COMMIT_BRANCH == "current"'
+        when: always
+      - if: '$CI_COMMIT_BRANCH == "main"'
+        when: always
+
   script:
     - echo "Mirroring the Git repo (source code) to GitHub..."
     - git config --global user.name "GitLab CI"
