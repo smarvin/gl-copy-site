@@ -1,6 +1,24 @@
-name: Merge mirror into main
-  run: |
-    git fetch origin mirror
-    git checkout main
-    git merge origin/mirror --no-ff -m "Auto-merge mirror into main"
-    git push origin main
+name: Auto-Merge Mirror to Main
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - mirror
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Merge mirror into main
+        run: |
+          git fetch origin mirror
+          git checkout main
+          git merge origin/mirror --no-ff -m "Auto-merge mirror into main"
+          git push origin main
