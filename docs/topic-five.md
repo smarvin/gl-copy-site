@@ -5,7 +5,7 @@ permalink: /docs/topic-five/
 ---
 
 
-The Bulk API allows creating or updating tasks in batches.
+The Bulk API allows creating or updating tasks in batches. Use batch at your own discretion.
 
 ### Example:
 ```
