@@ -1,0 +1,19 @@
+name: Trigger GitLab Pipeline on Merge
+
+on:
+  push:
+    branches:
+      - mirror
+
+jobs:
+  trigger-gitlab:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger GitLab Pipeline
+        env:
+          GITLAB_PROJECT_ID: 68146715  # Replace with your GitLab Project ID
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TRIGGER_TOKEN }}  # Store your GitLab token in GitHub Secrets
+        run: |
+          curl -X POST "https://gitlab.com/api/v4/projects/${GITLAB_PROJECT_ID}/trigger/pipeline" \
+          --form "token=${GITLAB_TOKEN}" \
+          --form "ref=mirror"
