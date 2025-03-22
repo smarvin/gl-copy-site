@@ -1,0 +1,24 @@
+name: Dispatch PR Slack Notify
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches:
+      - mirror
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch to github-automation
+        env:
+          GH_TOKEN: ${{ secrets.REPO_DISPATCH_TOKEN }}
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          
+          curl -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            https://api.github.com/repos/smarvin/github-automation/dispatches \
+            -d "{\"event_type\":\"pr_created\",\"client_payload\":{\"pr_title\":\"${PR_TITLE}\",\"pr_url\":\"${PR_URL}\"}}"
