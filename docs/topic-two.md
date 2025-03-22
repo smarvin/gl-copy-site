@@ -5,12 +5,12 @@ permalink: /docs/topic-two/
 ---
 
 
-## 🛠 Base URL
+## Base URL
 ```
 https://api.example.com/v1
 ```
 
-## 🔐 Authentication - OAuth 2.0 (Client Credentials)
+## Authentication - OAuth 2.0 (Client Credentials)
 
 ### Token Request
 ```
@@ -60,7 +60,7 @@ client_secret=YOUR_CLIENT_SECRET
 }
 ```
 
-## 🚦 Rate Limiting
+## Rate Limiting
 - **Limit:** 1000 requests per hour
 
 #### Example Rate Limit Headers
@@ -72,7 +72,7 @@ X-RateLimit-Reset: 1711046700
 
 - Returns `429 Too Many Requests` if exceeded.
 
-## 📄 Pagination
+## Pagination
 
 #### Supported Parameters:
 | Parameter | Type   | Description                               |
@@ -88,7 +88,7 @@ X-RateLimit-Reset: 1711046700
 }
 ```
 
-## 🧠 Filtering & Sorting
+## Filtering & Sorting
 
 ### Filtering Example
 ```
@@ -109,7 +109,7 @@ GET /tasks?sort_by=due_date&sort_order=asc
 - `sort_by`: `due_date`, `priority`, `created_at`
 - `sort_order`: `asc` or `desc`
 
-## 📋 Task Endpoints
+## Task Endpoints
 
 ### Get Tasks
 ```
@@ -196,7 +196,7 @@ DELETE /tasks/{id}
 404 Not Found
 ```
 
-## 🔔 Webhooks
+## Webhooks
 
 ### Create Webhook
 ```
@@ -240,7 +240,7 @@ POST /webhooks
 }
 ```
 
-## 🌐 Multi-Language Examples
+## Multi-Language Examples
 
 ### cURL Example
 ```bash
@@ -265,7 +265,7 @@ axios.get('https://api.example.com/v1/tasks', {
 }).then(console.log);
 ```
 
-## 🚨 Error Response Schema
+## Error Response Schema
 ```json
 {
   "error": {
