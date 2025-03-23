@@ -18,6 +18,7 @@ POST /tasks/bulk
   "tasks": [
     { "title": "Task 1", "priority": "high" },
     { "title": "Task 2", "priority": "low" }
+    { "title": "Task 3", "priority": "medium" }
   ]
 }
 ```
