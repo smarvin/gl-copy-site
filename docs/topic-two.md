@@ -5,7 +5,7 @@ permalink: /docs/topic-two/
 ---
 
 
-## 🛠 Base URL
+## Base URL
 ```
 https://api.example.com/v1
 ```
