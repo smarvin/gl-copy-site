@@ -10,7 +10,7 @@ permalink: /docs/topic-two/
 https://api.example.com/v1
 ```
 
-## 🔐 Authentication - OAuth 2.0 (Client Credentials)
+## Authentication - OAuth 2.0 (Client Credentials)
 
 ### Token Request
 ```
