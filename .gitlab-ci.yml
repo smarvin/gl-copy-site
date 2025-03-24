@@ -71,5 +71,5 @@ sync_github_to_gitlab:
     - git log -1 --oneline  # Optional: verify the commit pulled
 
     # Add GitLab as remote and push ONLY mirror branch contents to current
-    - git remote add gitlab https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/smarvin/new-site.git
+    - git remote add gitlab https://gitlab+deploy-token:${PROJECT_ACCESS_TOKEN}@gitlab.com/smarvin/new-site.git
     - git push gitlab mirror:current
