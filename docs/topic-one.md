@@ -6,7 +6,7 @@ permalink: /docs/topic-one/
 
 Welcome to the **Tasks API** – a RESTful API designed to help developers integrate task management functionality into their applications. The API provides secure, scalable access to create, read, update, delete, and manage tasks, with advanced features such as webhooks, filtering, sorting, and bulk operations.
 
-## 🎯 Purpose
+## Purpose
 The Tasks API enables teams, project management tools, productivity apps, and workflow systems to automate task handling and integrate task data across platforms.
 
 ## 🧩 General Usage
