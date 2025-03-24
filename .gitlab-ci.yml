@@ -54,17 +54,22 @@ mirror_to_github:
 sync_github_to_gitlab:
   stage: sync
   image: alpine:latest
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    - when: manual
   before_script:
     - apk add --no-cache git
   script:
+    - echo "Syncing GitHub mirror -> GitLab current..."
     - git config --global user.name "GitLab CI"
     - git config --global user.email "ci@example.com"
-    - git clone --mirror https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GITHUB_USER}/gl-copy-site.git /tmp/github-mirror  
+
+    # Clone only the GitHub mirror branch
+    - git clone --branch mirror https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GITHUB_USER}/gl-copy-site.git /tmp/github-mirror
     - cd /tmp/github-mirror
+    - git log -1 --oneline  # Optional: verify the commit pulled
+
+    # Add GitLab as remote and push ONLY mirror branch contents to current
     - git remote add gitlab https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/smarvin/new-site.git
-    - git push --mirror gitlab
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-
-
-
+    - git push gitlab mirror:current
