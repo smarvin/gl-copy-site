@@ -4,9 +4,11 @@ title: Webhook Secret Validation
 permalink: /docs/topic-three/
 ---
 
+# Webhook Secret Validation
+
 To verify that webhook requests originate from the API server, use a shared secret.
 
-### Steps:
+## Steps:
 1. Set a secret when creating the webhook:
 ```json
 {
