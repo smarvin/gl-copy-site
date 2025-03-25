@@ -4,15 +4,16 @@ layout: default
 permalink: /docs/topic-five/
 ---
 
+# Bulk API Support
 
 The Bulk API allows creating or updating tasks in batches.
 
-### Example:
+## Example:
 ```
 POST /tasks/bulk
 ```
 
-#### Request Body:
+### Request Body:
 ```json
 {
   "tasks": [
@@ -23,7 +24,7 @@ POST /tasks/bulk
 }
 ```
 
-#### Response:
+### Response:
 ```json
 {
   "created": ["task_101", "task_102"],
