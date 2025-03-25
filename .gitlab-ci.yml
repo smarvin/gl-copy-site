@@ -40,7 +40,7 @@ pages:
 mirror_to_github:
   stage: mirror
   rules:
-    - if: '$CI_COMMIT_BRANCH == "current"'
+    - if: '$CI_COMMIT_BRANCH == "current" && $CI_PIPELINE_SOURCE != "trigger"'
 
   script:
     - echo "Mirroring the Git repo (source code) to GitHub..."
@@ -55,11 +55,11 @@ sync_github_to_gitlab:
   stage: sync
   image: alpine:latest
   rules:
+    - if: '$CI_PIPELINE_SOURCE == "trigger" && $CI_COMMIT_BRANCH == "current"'
+      when: on_success
     - if: '$CI_PIPELINE_SOURCE == "web"'
       when: on_success
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
-      when: on_success
-    - if: '$CI_COMMIT_BRANCH == "current" && $CI_PIPELINE_SOURCE == "push"'
       when: on_success
     - when: never
   before_script:
