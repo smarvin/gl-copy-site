@@ -40,14 +40,29 @@ pages:
     paths:
       - $PAGES_DIR
   after_script:
-    - echo "Notifying GitHub contributor..."
+    - echo "Notifying contributor via GitHub..."
     - |
-      PR_NUMBER=42  # Hardcoded for proof-of-concept
-      curl -s -X POST \
+      COMMIT_SHA=$(git rev-parse HEAD)
+      echo "Looking up PR for commit $COMMIT_SHA"
+
+      PR_JSON=$(curl -s \
         -H "Authorization: token $GITHUB_TOKEN" \
-        -H "Accept: application/vnd.github.v3+json" \
-        https://api.github.com/repos/${GITHUB_USER}/gl-copy-site/issues/${PR_NUMBER}/comments \
-        -d "{\"body\": \"✅ Your changes are now live on [GitLab Pages](https://smarvin.gitlab.io/new-site/index.html/)\"}"
+        -H "Accept: application/vnd.github.groot-preview+json" \
+        https://api.github.com/repos/${GITHUB_USER}/gl-copy-site/commits/$COMMIT_SHA/pulls)
+
+      PR_NUMBER=$(echo "$PR_JSON" | grep '"number":' | head -n1 | grep -o '[0-9]\+')
+      echo "Found PR #$PR_NUMBER"
+
+      if [ -n "$PR_NUMBER" ]; then
+        curl -s -X POST \
+          -H "Authorization: token $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${GITHUB_USER}/gl-copy-site/issues/${PR_NUMBER}/comments \
+          -d "{\"body\": \"✅ Your changes are now live on [GitLab Pages](https://smarvin.gitlab.io/new-site/index.html)\"}"
+      else
+        echo "No associated PR found — skipping GitHub comment."
+      fi
+
 
 mirror_to_github:
 # Only mirror GitLab's `current` branch to GitHub when a real user pushes or merges.
