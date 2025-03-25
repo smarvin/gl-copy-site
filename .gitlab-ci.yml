@@ -40,7 +40,7 @@ pages:
 mirror_to_github:
   stage: mirror
   rules:
-    - if: '$CI_COMMIT_BRANCH == "current" || $CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_COMMIT_BRANCH == "current"'
 
   script:
     - echo "Mirroring the Git repo (source code) to GitHub..."
