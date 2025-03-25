@@ -38,6 +38,9 @@ pages:
       - $PAGES_DIR
 
 mirror_to_github:
+# Only mirror GitLab's `current` branch to GitHub when a real user pushes or merges.
+# Prevents automatic mirroring after a GitHub-triggered sync (which pushes as "GitLab CI").
+
   stage: mirror
   rules:
     - if: '$CI_COMMIT_BRANCH == "current" && $CI_PIPELINE_SOURCE == "push" && $GITLAB_USER_LOGIN != "GitLab CI"'
