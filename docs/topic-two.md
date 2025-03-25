@@ -39,7 +39,7 @@ client_secret=YOUR_CLIENT_SECRET
 Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
 
-## 🔄 OAuth Token Refresh
+## OAuth Token Refresh
 ```
 POST https://api.example.com/oauth/token
 ```
