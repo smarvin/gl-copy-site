@@ -40,7 +40,7 @@ pages:
 mirror_to_github:
   stage: mirror
   rules:
-    - if: '$CI_COMMIT_BRANCH == "current" && $CI_PIPELINE_SOURCE != "trigger"'
+    - if: '$CI_COMMIT_BRANCH == "current" && $CI_PIPELINE_SOURCE == "push" && $GITLAB_USER_LOGIN != "GitLab CI"'
 
   script:
     - echo "Mirroring the Git repo (source code) to GitHub..."
