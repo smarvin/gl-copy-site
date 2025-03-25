@@ -65,6 +65,7 @@ sync_github_to_gitlab:
     - apk add --no-cache git
   script:
     - echo "Syncing GitHub mirror -> GitLab current..."
+    - echo "Pipeline triggered by $CI_PIPELINE_SOURCE"
     - git config --global user.name "GitLab CI"
     - git config --global user.email "ci@example.com"
 
