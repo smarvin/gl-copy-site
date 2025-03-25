@@ -39,6 +39,15 @@ pages:
   artifacts:
     paths:
       - $PAGES_DIR
+  after_script:
+    - echo "Notifying GitHub contributor..."
+    - |
+      PR_NUMBER=42  # Hardcoded for proof-of-concept
+      curl -s -X POST \
+        -H "Authorization: token $GITHUB_TOKEN" \
+        -H "Accept: application/vnd.github.v3+json" \
+        https://api.github.com/repos/${GITHUB_USER}/gl-copy-site/issues/${PR_NUMBER}/comments \
+        -d "{\"body\": \"✅ Your changes are now live on [GitLab Pages](https://smarvin.gitlab.io/new-site/index.html/)\"}"
 
 mirror_to_github:
 # Only mirror GitLab's `current` branch to GitHub when a real user pushes or merges.
