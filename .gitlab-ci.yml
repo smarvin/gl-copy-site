@@ -12,13 +12,12 @@ variables:
   PAGES_DIR: public
   GIT_DEPTH: 0  # Full clone for build, but not used for GitHub mirroring
 
-before_script:
+build:
+  stage: build
+  before_script:
   - apt-get update -qq && apt-get install -y nodejs
   - gem install bundler
   - bundle install
-
-build:
-  stage: build
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
   script:
@@ -29,6 +28,10 @@ build:
 
 pages:
   stage: deploy
+  before_script:
+  - apt-get update -qq && apt-get install -y nodejs
+  - gem install bundler
+  - bundle install
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
   script:
@@ -58,13 +61,9 @@ sync_github_to_gitlab:
   stage: sync
   image: alpine:latest
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "trigger" && $CI_COMMIT_BRANCH == "current"'
-      when: on_success
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: on_success
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-      when: on_success
-    - when: never
+   - if: '$CI_PIPELINE_SOURCE == "trigger" && $CI_COMMIT_BRANCH == "current"'
+     when: on_success
+   - when: never
   before_script:
     - apk add --no-cache git
   script:
