@@ -59,6 +59,8 @@ sync_github_to_gitlab:
       when: on_success
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: on_success
+    - if: '$CI_COMMIT_BRANCH == "current" && $CI_PIPELINE_SOURCE == "push"'
+      when: on_success
     - when: never
   before_script:
     - apk add --no-cache git
