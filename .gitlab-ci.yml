@@ -62,12 +62,12 @@ pages:
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${GITHUB_USER}/gl-copy-site/issues/${PR_NUMBER}/comments \
-            -d "{\"body\": \"✅ Your changes are now live on [GitLab Pages](https://your-site.gitlab.io/)\"}"
+            -d "{\"body\": \"Your changes are now live on [GitLab Pages](https://your-site.gitlab.io/)\"}"
         else
-          echo "⚠️ No associated PR found — skipping GitHub comment."
+          echo "No associated PR found — skipping GitHub comment."
         fi
       else
-        echo "ℹ️ No GitHub commit SHA found — skipping PR notification."
+        echo "No GitHub commit SHA found — skipping PR notification."
       fi
 
 mirror_to_github:
