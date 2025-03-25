@@ -28,7 +28,7 @@ The Tasks API enables teams, project management tools, productivity apps, and wo
 - 🛎 **Real-Time Updates**: Get notified via webhooks when tasks change status.
 - 📥 **Bulk Processing**: Manage large datasets of tasks efficiently with batch operations.
 
-## 🛠 Best Practices & Guidelines
+## Best Practices & Guidelines
 - Use pagination when retrieving large task lists.
 - Leverage filtering and sorting to minimize data transfer.
 - Securely validate webhook payloads using the provided signature.
