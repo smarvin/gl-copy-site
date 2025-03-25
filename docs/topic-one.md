@@ -21,7 +21,7 @@ The Tasks API enables teams, project management tools, productivity apps, and wo
 - All dates and times use **ISO 8601 UTC format**.
 - Ensure your client handles **HTTP status codes** properly (e.g., `401 Unauthorized`, `429 Too Many Requests`).
 
-## 🔎 Example Use Cases
+## Example use cases
 - 📅 **Task Automation**: Auto-create tasks from user actions or workflows.
 - 📈 **Analytics & Reporting**: Retrieve task data for dashboards and reports.
 - 🤝 **Third-Party Integrations**: Sync tasks between apps, CRMs, or project management tools.
