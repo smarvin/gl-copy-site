@@ -40,32 +40,42 @@ pages:
     paths:
       - $PAGES_DIR
   after_script:
-    - echo "Notifying contributor via GitHub..."
-    # Extract the commit SHA from the GitLab CI environment and look up the associated PR on GitHub.
-    - |
-      COMMIT_SHA=$(git log -1 --pretty=format:'%H')
-      echo "Looking up PR for commit $COMMIT_SHA"
-
-      PR_JSON=$(curl -s \
+  - echo "Notifying contributor via GitHub..."
+  - |
+    # Look through the last 10 commits on main to find one associated with a GitHub PR
+    COMMIT_SHA=""
+    PR_JSON=""
+    for sha in $(git log --pretty=format:'%H' -n 10); do
+      echo "Checking commit $sha for GitHub PR association..."
+      response=$(curl -s \
         -H "Authorization: token $GITHUB_TOKEN" \
         -H "Accept: application/vnd.github.groot-preview+json" \
-        https://api.github.com/repos/${GITHUB_USER}/gl-copy-site/commits/$COMMIT_SHA/pulls)
+        https://api.github.com/repos/${GITHUB_USER}/gl-copy-site/commits/$sha/pulls)
 
-      echo "Raw GitHub PR JSON response:"
-      echo "$PR_JSON"
+      if echo "$response" | grep -q '"number":'; then
+        COMMIT_SHA=$sha
+        PR_JSON=$response
+        break
+      fi
+    done
+
+    if [ -n "$COMMIT_SHA" ]; then
+      echo "Found PR-associated commit: $COMMIT_SHA"
 
       PR_NUMBER=$(echo "$PR_JSON" | grep '"number":' | head -n1 | grep -o '[0-9]\+')
-
       if [ -n "$PR_NUMBER" ]; then
-        echo "Found PR #$PR_NUMBER — posting comment"
+        echo "Posting deployment comment to PR #$PR_NUMBER"
         curl -s -X POST \
           -H "Authorization: token $GITHUB_TOKEN" \
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/repos/${GITHUB_USER}/gl-copy-site/issues/${PR_NUMBER}/comments \
-          -d "{\"body\": \"Your changes are now live on [GitLab Pages](https://your-site.gitlab.io/)\"}"
+          -d "{\"body\": \"Your changes are now live on [GitLab Pages](https://smarvin.gitlab.io/new-site/index.html)\"}"
       else
-        echo "No associated PR found — skipping GitHub comment."
+        echo "PR JSON received, but PR number could not be parsed."
       fi
+    else
+      echo "No recent commits in main are associated with a GitHub PR. Skipping notification."
+    fi
 
 mirror_to_github:
   # Only mirror GitLab's `current` branch to GitHub when a real user pushes or merges.
