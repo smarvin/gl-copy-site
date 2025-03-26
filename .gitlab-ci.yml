@@ -82,7 +82,7 @@ mirror_to_github:
   # Prevents automatic mirroring after a GitHub-triggered sync (which pushes as "GitLab CI").
   stage: mirror
   rules:
-    - if: '$CI_COMMIT_BRANCH == "current" && $CI_PIPELINE_SOURCE == "push" && $GITLAB_USER_LOGIN != "GitLab CI"'
+    - if: '$CI_COMMIT_BRANCH == "current" && $CI_PIPELINE_SOURCE == "push" && $GITLAB_USER_LOGIN && $GITLAB_USER_LOGIN !~ /bot_/'
   script:
     - echo "CI_COMMIT_BRANCH is $CI_COMMIT_BRANCH"
     - echo "CI_PIPELINE_SOURCE is $CI_PIPELINE_SOURCE"
