@@ -16,7 +16,6 @@ build:
   stage: build
   before_script:
     - apt-get update -qq && apt-get install -y nodejs
-    - gem 'jekyll-last-modified-at'
     - gem install bundler
     - bundle install
   rules:
