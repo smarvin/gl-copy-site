@@ -26,10 +26,12 @@ To ensure that webhook requests originate from the trusted API server, you shoul
     ```
 
 3. Validate the payload signature in your handler.
+   
    a. Extract the raw request body (exact bytes as received).
+   
    b. Compute the HMAC using your webhook secret and SHA-256.
 
-       ```python
+     ```python
         import hmac
         import hashlib
         
@@ -41,7 +43,7 @@ To ensure that webhook requests originate from the trusted API server, you shoul
         
         if not hmac.compare_digest(expected_signature, signature):
             abort(401)  # Invalid signature
-       ```
-4. Reject requests with missing or invalid signatures:
+     ```
+5. Reject requests with missing or invalid signatures:
 
    If the signature is missing or doesn’t match, return a 401 Unauthorized response.
