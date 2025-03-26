@@ -24,11 +24,11 @@ The Tasks API enables teams, project management tools, productivity apps, and wo
 - Ensure your client handles **HTTP status codes** properly (e.g., `401 Unauthorized`, `429 Too Many Requests`).
 
 ## 🔎 Example Use Cases
-- 📅 **Task Automation**: Auto-create tasks from user actions or workflows.
-- 📈 **Analytics & Reporting**: Retrieve task data for dashboards and reports.
-- 🤝 **Third-Party Integrations**: Sync tasks between apps, CRMs, or project management tools.
-- 🛎 **Real-Time Updates**: Get notified via webhooks when tasks change status.
-- 📥 **Bulk Processing**: Manage large datasets of tasks efficiently with batch operations.
+- **Task Automation**: Auto-create tasks from user actions or workflows.
+- **Analytics & Reporting**: Retrieve task data for dashboards and reports.
+- **Third-Party Integrations**: Sync tasks between apps, CRMs, or project management tools.
+- **Real-Time Updates**: Get notified via webhooks when tasks change status.
+- **Bulk Processing**: Manage large datasets of tasks efficiently with batch operations.
 
 ## Best Practices & Guidelines
 - Use pagination when retrieving large task lists.
