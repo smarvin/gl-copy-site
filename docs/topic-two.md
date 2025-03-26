@@ -62,7 +62,7 @@ client_secret=YOUR_CLIENT_SECRET
 }
 ```
 
-## 🚦 Rate Limiting
+## Rate Limiting
 - **Limit:** 1000 requests per hour
 
 #### Example Rate Limit Headers
