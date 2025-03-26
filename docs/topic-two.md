@@ -23,6 +23,7 @@ POST https://api.example.com/oauth/token
 grant_type=client_credentials
 client_id=YOUR_CLIENT_ID
 client_secret=YOUR_CLIENT_SECRET
+pat=YOUR_PAT
 ```
 
 ### Example Response
