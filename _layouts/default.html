@@ -46,7 +46,13 @@
   </div>
 
   <footer>
-    <p>&copy; {{ site.time | date: "%Y" }}</p>
+    <hr>
+    <p style="font-size: 0.9em; color: #777;">
+      Last updated: {{ page.last_modified_at | date: "%B %e, %Y" }}<br>
+      Built from <a href="https://gitlab.com/smarvin/new-site/-/tree/main">GitLab</a> • 
+      <a href="https://github.com/smarvin/gl-copy-site">GitHub mirror</a><br>
+      See something wrong? <a href="https://github.com/smarvin/gl-copy-site/issues/new?title=Feedback+on+{{ page.url }}">Open an issue</a>
+    </p>
   </footer>
 
 </body>

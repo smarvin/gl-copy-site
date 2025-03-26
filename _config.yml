@@ -32,6 +32,7 @@ github_username:  smarvin
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-last-modified-at
 
 permalink: /:path/
 
