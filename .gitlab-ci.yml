@@ -99,6 +99,8 @@ sync_github_to_gitlab:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "trigger" && $CI_COMMIT_BRANCH == "current"'
       when: on_success
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_BRANCH == "current"'
+      when: manual
     - when: never
   before_script:
     - apk add --no-cache git
