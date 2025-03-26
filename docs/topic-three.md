@@ -30,17 +30,17 @@ To ensure that webhook requests originate from the trusted API server, you shoul
    b. Compute the HMAC using your webhook secret and SHA-256.
 
        ```python
-    import hmac
-    import hashlib
-    
-    secret = b'your_webhook_secret'
-    payload = request.data  # raw bytes
-    signature = request.headers.get('X-Signature', '').split('sha256=')[-1]
-    
-    expected_signature = hmac.new(secret, payload, hashlib.sha256).hexdigest()
-    
-    if not hmac.compare_digest(expected_signature, signature):
-        abort(401)  # Invalid signature
+        import hmac
+        import hashlib
+        
+        secret = b'your_webhook_secret'
+        payload = request.data  # raw bytes
+        signature = request.headers.get('X-Signature', '').split('sha256=')[-1]
+        
+        expected_signature = hmac.new(secret, payload, hashlib.sha256).hexdigest()
+        
+        if not hmac.compare_digest(expected_signature, signature):
+            abort(401)  # Invalid signature
        ```
 4. Reject requests with missing or invalid signatures:
 
