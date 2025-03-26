@@ -41,7 +41,8 @@ pages:
       - $PAGES_DIR
   after_script:
     - echo "Notifying contributor via GitHub..."
-    - >
+    # Extract the commit SHA from the GitLab CI environment and look up the associated PR on GitHub.
+    - |
       COMMIT_SHA=$(git log -1 --pretty=format:'%H')
       echo "Looking up PR for commit $COMMIT_SHA"
 
