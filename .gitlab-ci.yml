@@ -84,6 +84,10 @@ mirror_to_github:
   rules:
     - if: '$CI_COMMIT_BRANCH == "current" && $CI_PIPELINE_SOURCE == "push" && $GITLAB_USER_LOGIN != "GitLab CI"'
   script:
+    - echo "CI_COMMIT_BRANCH is $CI_COMMIT_BRANCH"
+    - echo "CI_PIPELINE_SOURCE is $CI_PIPELINE_SOURCE"
+    - echo "GITLAB_USER_LOGIN is $GITLAB_USER_LOGIN"
+    - echo "Triggered by ${CI_PROJECT_URL}/-/pipelines/${CI_PIPELINE_ID}"
     - echo "Mirroring the Git repo (source code) to GitHub..."
     - git config --global user.name "GitLab CI"
     - git config --global user.email "ci@example.com"
