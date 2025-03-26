@@ -74,7 +74,7 @@ X-RateLimit-Reset: 1711046700
 
 - Returns `429 Too Many Requests` if exceeded.
 
-## 📄 Pagination
+## Pagination
 
 #### Supported Parameters:
 | Parameter | Type   | Description                               |
