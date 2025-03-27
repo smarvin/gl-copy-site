@@ -90,7 +90,7 @@ X-RateLimit-Reset: 1711046700
 }
 ```
 
-## 🧠 Filtering & Sorting
+## Filtering and Sorting
 
 ### Filtering Example
 ```
