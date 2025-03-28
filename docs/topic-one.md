@@ -11,7 +11,7 @@ Welcome to the **Tasks API** – a RESTful API designed to help developers integ
 ## Purpose
 The Tasks API enables teams, project management tools, productivity apps, and workflow systems to automate task handling and integrate task data across platforms.
 
-## 🧩 General Usage
+## General Usage
 - All requests are made over HTTPS.
 - API responses are returned in JSON format.
 - Authentication is required for all endpoints via **OAuth 2.0 (Client Credentials Grant)**.
