@@ -18,7 +18,7 @@ The Tasks API enables teams, project management tools, productivity apps, and wo
 - Rate limiting applies: **1000 requests per hour** per token.
 - Pagination, filtering, and sorting are available for efficient data handling.
 
-## ✅ Requirements
+## Requirements
 - **OAuth 2.0 client credentials** for token generation.
 - All dates and times use **ISO 8601 UTC format**.
 - Ensure your client handles **HTTP status codes** properly (e.g., `401 Unauthorized`, `429 Too Many Requests`).
