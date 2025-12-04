@@ -10,6 +10,8 @@ To ensure that webhook requests originate from the trusted API server, you shoul
 
 ## Steps:
 1. Set a secret when creating the webhook.
+
+   To set a secret, enter the following code:
     ```json
     {
       "url": "https://yourapp.com/webhook-handler",
