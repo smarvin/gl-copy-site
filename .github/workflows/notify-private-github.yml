@@ -10,10 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger private repo sync
-  run: |
-    curl -X POST \
-      -H "Accept: application/vnd.github+json" \
-      -H "Authorization: Bearer ${{ secrets.PRIVATE_REPO_PAT }}" \
-      https://api.github.com/repos/smarvin/gh-to-gh-roundtrip/dispatches \
-      -d '{"event_type": "sync_public_to_private"}'
-
+        run: |
+            curl -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.PRIVATE_REPO_PAT }}" \
+            https://api.github.com/repos/smarvin/gh-to-gh-roundtrip/dispatches \
+            -d '{"event_type": "sync_public_to_private"}'
