@@ -1,4 +1,4 @@
-# GitHub Private ↔ GitHab Public Sync Strategy
+# GitHub Private ↔ GitHub Public Sync Strategy
 
 This project uses a bi-directional sync setup:
 
