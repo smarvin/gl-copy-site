@@ -11,4 +11,4 @@ This is a second paragraph that we're using to test a workflow.
 
 This is a much needed third paragraph.
 
-This is an unneeded fourth paragraph.
+This is an unneeded fourth paragraph. But it helps with the sync workflow testing.
