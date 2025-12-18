@@ -7,6 +7,8 @@ permalink: /docs/topic-two/
 # Tasks API Reference
 
 ## Base URL
+
+The base URL is:
 ```
 https://api.example.com/v1
 ```
