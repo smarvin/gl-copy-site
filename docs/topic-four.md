@@ -9,6 +9,6 @@ permalink: /docs/topic-four/
 Webhooks will be retried automatically if your server responds with an error (HTTP status >= 400).
 
 ## Retry Policy:
-- Maximum Retries: 5
+- Maximum Retries: 7
 - Exponential backoff applied
 - Failure notification after final attempt
