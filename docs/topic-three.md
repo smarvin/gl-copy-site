@@ -20,7 +20,7 @@ To ensure that webhook requests originate from the trusted API server, you shoul
     ```
 2. Receive the webhook with a signature header.
 
-   The API will include an `X-Signature` header in each request:
+   The API includes an `X-Signature` header in each request:
     ```
     X-Signature: sha256=abcdef123456...
     ```
